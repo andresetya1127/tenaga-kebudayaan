@@ -1,0 +1,167 @@
+    {
+        "perlindungan": [
+            "Juru Pelihara",
+            "Juru Gambar",
+            "Polisi Khusus Cagar Budaya",
+            "Tenaga Registrasi Cagar Budaya",
+            "Tenaga Pengamanan Cagar Budaya",
+            "Tenaga Pemeliharaan Cagar Budaya",
+            "Tenaga Pemugaran Cagar Budaya",
+            "Tenaga Konversi",
+            "Tenaga Dokumentasi",
+            "Tenaga Publikasi"
+        ],
+        "pengembangan": [
+            "Tenaga Peneliti Cagar Budaya",
+            "Tenaga Revitalisi Cagar Budaya",
+            "Tenaga Adaptasi Cagar Budaya"
+        ],
+        "permuseuman": [
+            "Edukator",
+            "Humas",
+            "Konservator",
+            "Kurator",
+            "Penata Pameran",
+            "Promosi",
+            "Registrator",
+            "Restorator"
+        ],
+        "kesejarahan": [
+            "Dokumentasi Sejarah",
+            "Pelaku Sejarah",
+            "Pemandu Wisata Sejarah",
+            "Peneliti Sejarah",
+            "Pendidik Sejarah",
+            "Penulis Sejarah",
+            "Sejarawan",
+            "Verifikator Sejarah"
+        ],
+        "sdm pelestari nilai budaya": [
+            "Budayawan",
+            "Peneliti Kebudayaan",
+            "Pendidik Budaya",
+            "Pelaku Dokumentasi Nilai Budaya",
+            "Administrator Budaya",
+            "Manajer Budaya"
+        ],
+        "sdm internalisasi nilai budaya": [
+            "Penyuluh Budaya"
+        ],
+        "sdm diploma budaya": [
+            "Diplomat Budaya",
+            "Pekerja Eksebisi Budaya"
+        ],
+        "kesenian | seni tari": [
+            "Penari",
+            "Penata Tari/Koreografer"
+        ],
+        "kesenian | musik": [
+            "Pemain Alat Musik",
+            "Pencipta Lagu",
+            "Penyanyi",
+            "Konduktor"
+        ],
+        "kesenian | etnomusiknologi": [
+            "Pemain Alat Musik",
+            "Pencipta/composer"
+        ],
+        "kesenian | karawatin": [
+            "Penabuh/Pemain Alat Musik Tradisional",
+            "Sinden/Penyanyi Khas Daerah"
+        ],
+        "kesenian | pendalang": [
+            "Dalang"
+        ],
+        "kesenian | teater": [
+            "Sutradara",
+            "Asisten Sutradara",
+            "Aktor",
+            "Penata Lampu",
+            "Manajer Panggung",
+            "Penata Peran (Casting)",
+            "Penata Artistik",
+            "Penata Efek (Visual dan Suara)",
+            "Penulis Naskah"
+        ],
+        "seni rupa | lukis": [
+            "Pelukis",
+            "Kurator Seni Rupa",
+            "Pengamat/Kritikus",
+            "Pengkaji Peneliti/Sejarawan Seni Rupa",
+            "Konservator",
+            "Seniman Mural"
+        ],
+        "seni rupa | kriya": [
+            "Pembatik",
+            "Penenun",
+            "Pematung",
+            "Keramikus",
+            "Kriawan Kayu",
+            "Kriawan Logam",
+            "Kriawan Kaca",
+            "Kriawan Bambu",
+            "Kriawan Keramik"
+        ],
+        "seni rupa | desain": [
+            "Pegrafis",
+            "Desainer Produk",
+            "Desainer Interior-Eksterior",
+            "Desainer Komunikasi Visual",
+            "Artistek Undagi (Artistek Tradisional Bali)",
+            "Arsitek Landskap",
+            "Komikus/Kartunis/Karikaturis/Ilustrator"
+        ],
+        "seni rupa | lainnya": [
+            "Desainer Mode/Tekstil (Fashion Designer)",
+            "Penganyam",
+            "Pendidik Seni Rupa",
+            "Juru Lelang",
+            "Dokumentator/Arsiparis",
+            "Seniman Tato",
+            "Penata Pameran"
+        ],
+        "kesenian | lainnya": [
+            "Penata Rias Pentas/Peran",
+            "Penata Busana",
+            "Kurator Seni Pertunjukan",
+            "Peneliti/Pengkaji/Sejarawan Seni Pertunjukan",
+            "Pengamat dan Kritikus Seni Pertunjukan",
+            "Pendongeng/Pencerita",
+            "Pelawak",
+            "Pesulap",
+            "Seniman Akrobat"
+        ],
+        "seni media | fotografi": [
+            "Fotografer"
+        ],
+        "seni media | perfiman/sinematography": [
+            "Film Maker",
+            "Sutradara Film",
+            "Asisten Sutradara Film",
+            "Produser Film",
+            "Kameramen",
+            "Pentas Rias Wajah dan Rambut Film",
+            "Penata Busana Film",
+            "Penata Artistik Film",
+            "Penata Efek Film",
+            "Penata Lampu Film",
+            "Penyunting Suara Film",
+            "Penyunting/Editor Film/Sensor Film",
+            "Storyboard Film",
+            "Sulih Suara Film",
+            "Narator Film",
+            "Kurator Film",
+            "Aktor/Aktris Film",
+            "Tenaga Teknis Film",
+            "Kritikus Film"
+        ],
+        "kebahasaan sastra": [
+            "Sastrawan",
+            "Penulis Cerpen",
+            "Penulis Puisi",
+            "Pustakawan",
+            "Penyair",
+            "Penulis Hikayat",
+            "Pembaca Hikayat"
+        ]
+    }

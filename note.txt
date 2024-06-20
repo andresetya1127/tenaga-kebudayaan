@@ -1,0 +1,25 @@
+#tenaga kebudayaan +field
+-Jenis Tenaga Budaya
+laporan submenu
+field latlang
+sorting map latlang berdasarkan menu = pengembangan
+fitur galeri
+
+Lembaga komunitas += daerah
+
+!#ODCB +peringkat cagar budaya = 0 Tidak berpeingkat ,1 Kabupaten, 2 Provinsi ,3 nasional
++Sorting peringkat
+
+
+pendaftaran tenaga kebudayaan
+tenaga kebudayaan multi bidang
+Landing page Utaman Sekapur Sirih dari kabid
+
+
+
+
+
+
+
+
+######## token =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 #############
