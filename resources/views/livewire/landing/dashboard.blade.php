@@ -10,6 +10,7 @@
         <x-alert-card />
 
 
+
         @if (!$dataModal)
             <div class="row row-cols-2 row-cols-lg-4">
                 @foreach ($widget as $key => $val)
@@ -89,16 +90,26 @@
                 <div class="col-12">
                     <x-card>
                         <div class="text-end mb-2">
-                            <button class="mb-2 me-2 btn {{ $slide ? 'btn-primary' : 'btn-outline-primary' }}"
-                                wire:click="$set('slide',true)">
+                            <button
+                                class="mb-2 me-2 btn {{ $slide == 'pendataan' ? 'btn-primary' : 'btn-outline-primary' }}"
+                                wire:click="$set('slide','pendataan')">
+                                Konfirmasi Tenaga Budaya
+                                <span class="badge bg-warning">
+                                    {{ $karyaBudaya->total() }}
+                                </span>
+                            </button>
+                            <button
+                                class="mb-2 me-2 btn {{ $slide == 'karya_budaya' ? 'btn-primary' : 'btn-outline-primary' }}"
+                                wire:click="$set('slide','karya_budaya')">
                                 Konfirmasi Karya Budaya
                                 <span class="badge bg-warning">
                                     {{ $karyaBudaya->total() }}
                                 </span>
                             </button>
 
-                            <button class="mb-2 me-2 btn {{ $slide ? 'btn-outline-primary' : 'btn-primary' }}"
-                                wire:click="$set('slide',false)">
+                            <button
+                                class="mb-2 me-2 btn {{ $slide == 'karya_seni' ? 'btn-primary' : 'btn-outline-primary' }}"
+                                wire:click="$set('slide','karya_seni')">
                                 Konfirmasi Karya Seni
                                 <span class="badge bg-warning">
                                     {{ $karyaSeni->total() }}
@@ -106,7 +117,7 @@
                             </button>
                         </div>
 
-                        @if ($slide)
+                        @if ($slide == 'karya_budaya')
                             <h5 class="mb-3">Menunggu Konfirmasi Karya Budaya</h5>
                             <div class="table-responsive">
                                 <table class="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -152,7 +163,7 @@
                                 </table>
                                 <x-pagination :items="$karyaBudaya" />
                             </div>
-                        @else
+                        @elseif($slide == 'karya_seni')
                             <h5 class="mb-3">Menunggu Konfirmasi Karya Seni</h5>
                             <div class="table-responsive">
                                 <table class="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -198,6 +209,54 @@
                                 </table>
                                 <x-pagination :items="$karyaSeni" />
                             </div>
+                        @elseif ($slide == 'pendataan')
+                            <h5 class="mb-3">Menunggu Konfirmasi Karya Seni</h5>
+                            <div class="table-responsive">
+                                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nama</th>
+                                            <th>Bidang</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Kecamatan</th>
+                                            <th>Desa</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($pendataan as $data)
+                                            <tr>
+                                                <td class="text-center text-muted">
+                                                    {{ $loop->index + $pendataan->firstItem() }}
+                                                </td>
+                                                <td>{{ $data->nama }}</td>
+                                                <td>{{ Str::replace('|', ', ', $data->bidang) }}</td>
+                                                <td>{{ $data->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                                <td>{{ $data->kec->name }}</td>
+                                                <td>{{ $data->desaKel->name }}</td>
+                                                <td>
+                                                    <div class="badge bg-warning">Pending</div>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-secondary" type="button"
+                                                        onclick="return confirmTenaga('{{ $data->id_tenaga_kebudayaan }}')">
+                                                        Detail
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="20" class="text-center">
+                                                    Belum Ada Data.
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                                <x-pagination :items="$pendataan" />
+                            </div>
                         @endif
                     </x-card>
 
@@ -227,6 +286,23 @@
                         if (result.isConfirmed) {
                             // Panggil metode untuk melakukan tindakan yang sesuai jika pengguna mengonfirmasi
                             @this.confirmKarya()
+                        }
+                    })
+                }
+
+                function confirmTenaga(id) {
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: "Data Ini Akan Di Konfirmasi.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, Konfirmas!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Panggil metode untuk melakukan tindakan yang sesuai jika pengguna mengonfirmasi
+                            @this.confirmTenaga(id)
                         }
                     })
                 }

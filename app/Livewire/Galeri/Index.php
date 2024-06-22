@@ -67,6 +67,7 @@ class Index extends Component
             'kategori' => 'required|max:100',
             'gambar' => 'required|image|max:2048|mimes:png,jpg,jpeg,gif',
         ])->validate();
+
         try {
             foreach ($this->imgUpload as $img) {
                 $filename = md5($img . microtime()) . '.' .  $img->getClientOriginalExtension();

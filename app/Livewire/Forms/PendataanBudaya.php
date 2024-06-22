@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Models\Tbl_tenaga_kebudayaan;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -101,8 +102,6 @@ class PendataanBudaya extends Form
     public function store()
     {
 
-        $filename = md5($this->foto . microtime()) . '.' . $this->foto->getClientOriginalExtension();
-
 
         $data = [
             'nama' => $this->nama,
@@ -126,11 +125,19 @@ class PendataanBudaya extends Form
             'bidang' => implode('|', $this->bidang),
             'judul_karya_tahun' => $this->judul_karya_tahun,
             'penghargaan' => $this->penghargaan,
-            'foto' => $filename,
         ];
 
         if (Auth::user()->role == 1) {
             $data['status'] = 1;
+        }
+
+        $filename = '';
+
+        if ($this->foto instanceof UploadedFile) {
+            $filename = md5($this->foto . microtime()) . '.' . $this->foto->getClientOriginalExtension();
+            $this->foto->storeAs('public/photos', $filename);
+
+            $data['foto'] = $filename;
         }
 
         $tenaga = Tbl_tenaga_kebudayaan::create($data);
@@ -148,7 +155,6 @@ class PendataanBudaya extends Form
 
 
 
-        $this->foto->storeAs('public/photos', $filename);
         $this->reset();
     }
 
@@ -193,6 +199,10 @@ class PendataanBudaya extends Form
                     $this->foto->storeAs('public/photos', $filename);
                 }
                 $col['foto'] =  $filename;
+            } else {
+                if (Storage::exists('public/photos/' . $data->foto)) {
+                    Storage::delete('public/photos/' . $data->foto);
+                }
             }
 
             $data->update($col);

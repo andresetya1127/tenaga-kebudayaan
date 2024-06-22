@@ -32,7 +32,7 @@ class Show extends Component
         $budaya = new Tbl_tenaga_kebudayaan();
 
         return view('livewire.pendataan-budaya.show', [
-            'data' => $budaya->latest()->get(),
+            'data' => $budaya->where('status', 1)->latest()->get(),
             'page' => 'Pendataan Tenaga Kebudayaan'
         ]);
     }

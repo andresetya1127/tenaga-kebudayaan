@@ -6,6 +6,7 @@ use App\Livewire\Forms\PendataanBudaya;
 use App\Models\Desa;
 use App\Models\Kecamatan;
 use App\Models\Tbl_tenaga_kebudayaan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -39,6 +40,7 @@ class Add extends Component
             $this->form->all(),
             $this->form->rules([
                 'nama',
+                'email',
                 'tmpt_lahir',
                 'tgl_lahir',
                 'jk',
@@ -61,10 +63,13 @@ class Add extends Component
         $validator->validated();
 
         try {
+            DB::beginTransaction();
             $this->form->store();
+            DB::commit();
 
             $this->dispatch('alert-confirm', title: 'Data Berhasil Disimpan, Anda Ingin Keluar dari Halman Ini?', icon: 'success', rute: route('index.pendataan-kebudayaan'));
         } catch (\Throwable $th) {
+            DB::rollBack();
             dd($th->getMessage());
             $this->dispatch('sweat-alert', title: 'Data Gagal Disimpan.', icon: 'error');
         }

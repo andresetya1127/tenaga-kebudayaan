@@ -147,7 +147,8 @@
             <h6 class="c-blue-600">Sosial Media</h6>
             <div class="row row-cols-lg-2 g-3 mt-3">
                 <!--Email-->
-                <x-input label="Email" key="email" wire:model='form.email' place="Masukkan Email Valid..." />
+                <x-input type="email" label="Email" key="email" wire:model='form.email'
+                    place="Masukkan Email Valid..." />
 
                 <!--Facebook-->
                 <x-input label="Facebook" key="facebook" wire:model='form.facebook'

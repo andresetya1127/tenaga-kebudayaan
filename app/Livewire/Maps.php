@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Cagar_budaya_v2;
 use App\Models\Tbl_odcb;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class Maps extends Component
@@ -41,7 +42,8 @@ class Maps extends Component
             'dataMaps',
             [
                 'centerView' => $this->cView,
-                'marker' => $this->marker
+                'marker' => $this->marker,
+                'iconUrl' => asset('assets/js/init/')
             ]
         );
     }

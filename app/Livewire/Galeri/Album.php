@@ -2,27 +2,29 @@
 
 namespace App\Livewire\Galeri;
 
-use App\Models\Cagar_budaya_v2;
-use App\Models\Tbl_berita;
 use App\Models\tbl_galeri;
-use App\Models\Tbl_karya_budaya;
-use App\Models\Tbl_karya_seni;
-use App\Models\Tbl_odcb;
-use App\Models\Wbtb;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Album extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
 
-    public $dataAlbum;
+    public $galeri;
+
     public $modalEdit;
+    #[Validate('required')]
     public $imgUpload = [];
+
+    public $gambar;
+
 
     #[Locked]
     public $id;
@@ -30,34 +32,92 @@ class Album extends Component
     public function mount($id)
     {
         $this->id = $id;
+        $this->galeri = tbl_galeri::find($this->id);
     }
 
     public function render()
     {
-        $data = tbl_galeri::find($this->id);
-
         return view('livewire.galeri.album', [
-            'page' => 'Galeri ',
-            'galeri' => $data
+            'page' => 'Galeri '
         ]);
     }
 
-
-
-    public function confirmDelete()
+    public function updatedGambar()
     {
-        $data = tbl_galeri::findOrFail($this->id);
+        if (count($this->imgUpload) >= 5) {
+            $this->dispatch('sweat-alert', title: 'Gambar Sudah Melebihi Batas.', icon: 'warning');
+        } else {
+            Validator::make($this->all(), [
+                'gambar' => 'required|image|max:2048|mimes:png,jpg,jpeg,gif',
+            ])->validate();
+
+
+            array_push($this->imgUpload, $this->gambar);
+        }
+    }
+
+
+    public function addGaleri()
+    {
+
+        $nameField = $this->galeri->fotos ? explode('||', $this->galeri->fotos) : [];
 
         try {
-            foreach (explode('||', $data->foto) as $key) {
-                Storage::delete('public/photos/' . $key);
+            $this->validateOnly('imgUpload');
+
+            foreach ($this->imgUpload as $img) {
+                $filename = md5($img . microtime()) . '.' .  $img->getClientOriginalExtension();
+
+                $img->storeAs('public/photos', $filename);
+
+                array_push($nameField, $filename);
             }
 
-            $data->delete();
-            redirect()->route('list.galeri');
+
+            $this->galeri->update([
+                'foto' => Arr::join($nameField, '||'),
+            ]);
+
+            $this->dispatch('sweat-alert', title: 'Data Berhasil Disimpan.', icon: 'success');
+            $this->reset('modalEdit', 'imgUpload', 'gambar');
+            $this->resetValidation();
+        } catch (\Throwable $th) {
+            //throw $th;
+            $this->dispatch('sweat-alert', title: $th->getMessage(), icon: 'error');
+        }
+    }
+
+
+    public function deleteImg($id)
+    {
+        try {
+            unset($this->imgUpload[$id]);
+            $this->dispatch('sweat-alert', title: 'Gambar Berhasil Dihapus.', icon: 'success');
         } catch (\Throwable $th) {
             //throw $th;
             $this->dispatch('sweat-alert', title: 'Data Gagal Dihapus.', icon: 'error');
         }
+    }
+
+
+
+    public function confirmDelete($index)
+    {
+
+        $imp = explode('||', $this->galeri->foto);
+
+        if (Storage::exists('public/photos/' . $imp[$index])) {
+            Storage::delete('public/photos/' . $imp[$index]);
+        }
+
+        unset($imp[$index]);
+
+        $file = implode('||', $imp);
+
+
+
+        $this->galeri->update([
+            'foto' => $file,
+        ]);
     }
 }

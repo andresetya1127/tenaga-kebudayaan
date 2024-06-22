@@ -46,22 +46,17 @@ class Edit extends Component
             $this->form->all(),
             $this->form->rules([
                 'nama',
+                'email',
                 'tmpt_lahir',
                 'tgl_lahir',
                 'jk',
-                'pendidikan',
                 'agama',
-                'pekerjaan',
+                'kecamatan',
+                'desa',
                 'alamat',
                 'nik',
                 'no_hp',
-                'email',
-                'facebook',
-                'instagram',
-                'youtube',
                 'bidang',
-                'judul_karya_tahun',
-                'penghargaan',
             ])
         );
 

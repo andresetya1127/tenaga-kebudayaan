@@ -61,8 +61,8 @@
 
     @if (!$modalAdd && !$filter)
         <div class="mb-4 d-flex align-items-center justify-content-end gap-3">
-            <button class="btn btn-outline-info" wire:click='$toggle("modalAdd")'><i
-                    class="fa-solid fa-camera"></i></button>
+            <button class="btn btn-outline-info" wire:click='$toggle("modalAdd")'>
+                <i class="fa-solid fa-camera"></i></button>
 
             <x-search-table />
         </div>

@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     Livewire.on("dataMaps", (data) => {
         let cView = data[0].centerView;
-
         const map = L.map("map").setView(cView, 12);
 
         const tiles = L.tileLayer(
@@ -33,28 +32,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // #####    Pengembangan   #####
         function getIcon(icon) {
-            let option = {
-                red: {
-                    iconUrl:
-                        "http://127.0.0.1:8000/storage/photos/logo-web/red.png",
-                    iconSize: [30, 45], // size of the icon
-                    shadowSize: [50, 64], // size of the shadow
-                    iconAnchor: [5, 24], // point of the icon which will correspond to marker's location
-                    shadowAnchor: [4, 62], // the same for the shadow
-                    popupAnchor: [-3, -76],
-                },
-                green: {
-                    iconUrl:
-                        "http://127.0.0.1:8000/storage/photos/logo-web/green.png",
-                    iconSize: [30, 45], // size of the icon
-                    shadowSize: [50, 64], // size of the shadow
-                    iconAnchor: [5, 24], // point of the icon which will correspond to marker's location
-                    shadowAnchor: [4, 62], // the same for the shadow
-                    popupAnchor: [-3, -76],
-                },
-            };
+            let def = {};
 
-            return L.icon(option[icon]);
+            if (icon == "red") {
+                def.iconUrl = data[0].iconUrl + "/red.png";
+            } else if (icon == "green") {
+                def.iconUrl = data[0].iconUrl + "/green.png";
+            } else if (icon == "orange") {
+                def.iconUrl = data[0].iconUrl + "/orange.png";
+            } else {
+                def.iconUrl = data[0].iconUrl + "/blue.png";
+            }
+
+            def.iconSize = [30, 45]; // size of the icon
+            def.shadowSize = [50, 64]; // size of the shadow
+            def.iconAnchor = [5, 24]; // point of the icon which will correspond to marker's location
+            def.shadowAnchor = [4, 62]; // the same for the shadow
+            def.popupAnchor = [-3, -76];
+
+            return L.icon(def);
         }
 
         try {

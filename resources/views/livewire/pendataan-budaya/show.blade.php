@@ -41,10 +41,6 @@
                                     <i class="fa fa-pencil"></i>
                                 </x-link-button>
 
-                                <x-link-button link="">
-                                    <i class="fa fa-eye"></i>
-                                </x-link-button>
-
                                 <x-link-button onclick="return confirmAction('{{ $dt->id_tenaga_kebudayaan }}')"
                                     cls="btn-danger">
                                     <i class="fa fa-trash"></i>
