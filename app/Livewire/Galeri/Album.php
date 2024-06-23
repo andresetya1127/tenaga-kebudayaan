@@ -60,7 +60,7 @@ class Album extends Component
     public function addGaleri()
     {
 
-        $nameField = $this->galeri->fotos ? explode('||', $this->galeri->fotos) : [];
+        $nameField = $this->galeri->foto ? explode('||', $this->galeri->foto) : [];
 
         try {
             $this->validateOnly('imgUpload');
@@ -72,7 +72,6 @@ class Album extends Component
 
                 array_push($nameField, $filename);
             }
-
 
             $this->galeri->update([
                 'foto' => Arr::join($nameField, '||'),

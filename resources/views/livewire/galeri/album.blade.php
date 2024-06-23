@@ -4,6 +4,9 @@
     <x-page-title :page="$page" />
 
     @if ($modalEdit)
+        <button class="btn btn-primary mb-3" wire:click='$toggle("modalEdit")''>
+            Kembali
+        </button>
         <div class="row animate__animated animate__backInRight">
             <div class="col-lg-6">
                 <x-card>
@@ -57,7 +60,7 @@
             </button>
         </div>
 
-        <div class="row">
+        <div class="row gy-3">
             <div class="col-12 my-4">
                 <div class="d-flex gap-3">
                     <span><i class="fa-solid fa-table-list"></i> {{ $galeri->kategori }}</span>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Galeri;
 
 use App\Models\tbl_galeri;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
@@ -98,6 +99,26 @@ class Index extends Component
         try {
             unset($this->imgUpload[$id]);
             $this->dispatch('sweat-alert', title: 'Gambar Berhasil Dihapus.', icon: 'success');
+        } catch (\Throwable $th) {
+            //throw $th;
+            $this->dispatch('sweat-alert', title: 'Data Gagal Dihapus.', icon: 'error');
+        }
+    }
+
+
+    public function deleteGaleri($id)
+    {
+        try {
+            $album = tbl_galeri::find($id);
+
+            foreach (explode('||', $album->foto) as $key) {
+                if (Storage::exists('public/photos/' . $key)) {
+                    Storage::delete('public/photos/' . $key);
+                }
+            }
+
+            $album->delete();
+            $this->dispatch('sweat-alert', title: 'Album Berhasil Dihapus.', icon: 'success');
         } catch (\Throwable $th) {
             //throw $th;
             $this->dispatch('sweat-alert', title: 'Data Gagal Dihapus.', icon: 'error');

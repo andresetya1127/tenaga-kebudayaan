@@ -19,7 +19,7 @@
     @endif
 
     <input {{ $attributes->merge(['class' => $class, 'type' => $tp, 'disabled' => $disable]) }}
-        placeholder="{{ $place ?? false ? $place : ':Ketikkan Sesuatu...' }}" wire:loading.attr="disabled">
+        placeholder="{{ $place ?? false ? $place : ':Masukkan ' . $label . ' ...' }}" wire:loading.attr="disabled">
 
     @error($key)
         <div class="invalid-feedback">

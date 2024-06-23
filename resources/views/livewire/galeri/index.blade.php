@@ -70,22 +70,50 @@
         <div class="row row-cols-2 row-cols-lg-3 g-4 animate__animated animate__backInRight">
             @forelse ($galeri as $img)
                 <div class="col">
-                    <a href="{{ route('album.galeri', $img->id) }}">
-                        <div class="card text-bg-dark d-flex" style="height: 300px;">
-                            <img src="{{ asset('storage/photos/' . explode('||', $img->foto)[0]) }}"
-                                class="card-img img-responsive" alt="...">
-                            <div class="card-img-overlay img-overlay-hover">
+                    <div class="card text-bg-dark d-flex" style="height: 300px;">
+                        <a href="{{ route('album.galeri', $img->id) }}">
+                            @if (!empty($img->fotos))
+                                <img src="{{ asset('storage/photos/' . explode('||', $img->foto)[0]) }}"
+                                    class="card-img img-responsive" alt="...">
+                            @endif
+                            <div class="card-img-overlay img-overlay-hover text-white">
                                 <h3 class="card-title fs-5 text-light text-center">{{ $img->nama_foto }}</h3>
                                 <span class="text-center">{{ 'Kategori : ' . $img->kategori }}</span>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+
+                        <button class="btn btn-danger" onclick="return confirmAlbum({{ $img->id }})">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
             @empty
                 <div class="col m-auto text-center">Belum ada gambar.</div>
             @endforelse
         </div>
+        <x-pagination :items="$galeri" />
     @endif
 
-    <x-pagination :items="$galeri" />
 </div>
+
+
+@push('script')
+    <script>
+        function confirmAlbum(index) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus itu!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Panggil metode untuk melakukan tindakan yang sesuai jika pengguna mengonfirmasi
+                    @this.deleteGaleri(index)
+                }
+            })
+        }
+    </script>
+@endpush

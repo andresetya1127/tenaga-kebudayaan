@@ -29,7 +29,7 @@ class Setting extends Component
         $this->nik = auth()->user()->nik;
         $this->no_hp = auth()->user()->no_hp;
         $this->jenis_kelamin = auth()->user()->jenis_kelamin;
-        $this->foto = asset('storage/photos/' . auth()->user()->foto);
+        $this->foto = asset('storage/profile/' . auth()->user()->foto);
         $this->email = auth()->user()->email;
     }
 
@@ -49,7 +49,6 @@ class Setting extends Component
         $data = [
             'name' => $this->name,
             'email' => $this->email,
-            'nik' => $this->nik,
             'jenis_kelamin' => $this->jenis_kelamin,
             'no_hp' => $this->no_hp,
         ];
@@ -57,7 +56,6 @@ class Setting extends Component
         $rule = [
             'name' => 'required|min:3|max:100',
             'email' => 'required|min:5|max:150',
-            'nik' => 'required|min:16|max:16',
             'jenis_kelamin' => 'required|in:L,P',
             'no_hp' => 'required|min:12|max:12',
         ];

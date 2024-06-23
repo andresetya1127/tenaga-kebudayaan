@@ -20,10 +20,6 @@
                         <x-input place="Masukkan Nama." wire:model='name' key="name" />
                     </div>
                     <div class="">
-                        <label for="" class="form-label">NIK</label>
-                        <x-input type="number" place="Masukkan Judul Berita." wire:model='nik' key="nik" />
-                    </div>
-                    <div class="">
                         <label for="" class="form-label">No Hp</label>
                         <x-input type="number" place="Masukkan No Hp." wire:model='no_hp' key="no_hp" />
                     </div>
